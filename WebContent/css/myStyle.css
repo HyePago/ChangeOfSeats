@@ -1,0 +1,100 @@
+/* Style */
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding');
+
+body {
+	margin: 0dp;
+	padding: 0dp;
+	background: #FFFBE6;
+    font-family: 'Nanum Gothic Coding' ,'Nanum Brush Script', sans-serif, serif;
+}
+
+/* Main */
+.main_header {
+	margin: 0dp;
+	padding: 0dp;
+	text-align: center;
+}
+.main_section {
+	text-align: center;
+	width: 1300px;
+	margin: auto;
+}
+.main_nav { 
+	text-align: center;
+}
+.main_nav ul {
+    font-family: 'Nanum Gothic Coding' ,'Nanum Brush Script', sans-serif, serif;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #B9E4C9;
+	text-align: center;
+}
+.main_nav ul li {
+	float: left;
+	width: 200px;
+	text-align: center;
+}
+.main_nav ul li a {
+	display: block;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	color: black;
+}
+.main_nav ul li a:hover { 
+	background-color: #356859;
+	color: white;
+}
+
+/* main View */
+.main_view_div {
+	width: 900px;
+	margin: auto;
+	margin-top: 20px;
+	text-align: center;
+}
+.main_view_table {
+	width: 450px;
+	margin: auto;
+}
+.main_view_table th {
+	text-align: right;
+	padding: 8px 0px;
+}
+.main_view_table td {
+	width: 300px;
+}
+.main_view_table input[type=number] {
+	width: 40px;
+	border-radius: 10px;
+	text-align: center;
+	padding-left: 15px;
+}
+.main_view_table input[type=button] {
+	width: 55px;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 0.9em;
+	background-color: #37966F;
+	color: white;
+}
+.sample_number {
+	margin: 20px 0px;
+	padding: 20px 0px;
+}
+.main_seat_table {
+	width: 500px;
+	margin: auto;
+	margin-top: 20px;
+}
+.main_seat_table td {
+	border: 1px solid #37966F;
+}
+.seat {
+	width: 500px;
+	min-width: 200px;
+	height: 50px;
+	display: inline;
+}
