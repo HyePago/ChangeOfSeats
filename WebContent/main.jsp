@@ -16,7 +16,9 @@
 		<h1>우리 반 자리 배치 프로그램</h1>
 		<nav class="main_nav">
 			<ul>
-				<li><a href="#">자리배치 프로그램</a></li>
+				<li><a href="index.jsp">자리배치 프로그램</a></li>
+				<li><a href="#">JSP 순서</a></li>
+				<li><a href="#">관리자 페이지</a></li>
 			</ul>
 		</nav>
 	</header>
