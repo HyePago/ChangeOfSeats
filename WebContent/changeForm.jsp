@@ -57,31 +57,38 @@
 			}
 		}
 		
-
 		// i : 자리, number : 번호
 		int division_cnt = 1;
 		int height_cnt = 1;
 		int if_cnt = 0;
 		boolean sw = false;
+		boolean sw1 = false;
+		boolean sw2 = false;
 		
 		for(int i=0; i<seat.length; i++){
+			sw1 = false;
+			sw2 = false;
 			
 			if(if_cnt == line){
 				if_cnt = 0;
 				division_cnt++;
+				
+				sw1 = true;
 			}
 			if(division_cnt == division + 1){
 				division_cnt = 1;
 				height_cnt++;
+				
+				sw2 = true;
 			}
 			if_cnt++;
 			
 			int number = rand.nextInt(end_number) + start_number; // 번호
 			
-			if(person[number] == 1){
+			if(person[number] == 1){ // 해당 번호가 유효하면
+				sw = false;
 				// 조건 제한
 				for(int j=0; j<if_number.length - 1; j++){
-					sw = false;
 					if(number == Integer.parseInt(if_number[j])) {
 						// 조건에 해당하는 번호와 같다면 분단인지 라인인지 구분
 						
@@ -111,8 +118,6 @@
 							}
 						}
 						
-						if(sw == true) break;
-						
 						if(if_select_2[j].equals("2")){
 							// 연산자
 							switch(if_select[j]){
@@ -140,13 +145,24 @@
 						}
 					}
 					
-					if(sw == true) break;
+					if(sw == true){
+						break;
+					}
 				}
 				
 				if(sw == true){
 					i--;
 					sw = false;
 					if_cnt--;
+					
+					if(sw1 == true){
+						division_cnt--;
+						if_cnt = line;
+					}
+					if(sw2 == true){
+						height_cnt--;
+						division_cnt = division + 1;
+					}
 					
 					continue;
 				}
@@ -156,6 +172,13 @@
 			} else {
 				i--;
 				if_cnt--;
+				
+				if(sw1 == true){
+					division_cnt--;
+				}
+				if(sw2 == true){
+					height_cnt--;
+				}
 				
 				continue;
 			}
