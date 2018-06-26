@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,20 +15,26 @@
 		int start_number = Integer.parseInt(request.getParameter("start_number"));
 		int end_number = Integer.parseInt(request.getParameter("end_number"));
 		int division = Integer.parseInt(request.getParameter("division"));
-		int line = Integer.parseInt(request.getParameter("line"));
 		int height_line = Integer.parseInt(request.getParameter("height_line"));
-		String expert = request.getParameter("expert");
+		int line = Integer.parseInt(request.getParameter("line"));
+		int expert = Integer.parseInt(request.getParameter("expert"));
 		String p_total_seat = request.getParameter("total_seat");
 		String[] total_seat = p_total_seat.split(",");
-		
-		int[] seat = new int[Integer.parseInt(expert)];
-		int[] person = new int[end_number + 1];
+
+		int[] seat = new int[expert];
+		int[] person = new int[expert];
 		
 		String[] missing_number = new String[0];
 		String[] if_number = new String[0];
 		String[] if_number_2 = new String[0];
 		String[] if_select = new String[0];
 		String[] if_select_2 = new String[0];
+		
+		Random rand = new Random();
+		
+		for(int i=0; i<person.length; i++){
+			person[i] = 1;
+		}
 		
 		try {
 			missing_number = (String[])application.getAttribute("missing_number");
@@ -39,149 +46,145 @@
 			e.printStackTrace();
 		}
 		
-		Random rand = new Random();
-		
-		for(int i=start_number; i<person.length; i++){
-			person[i] = 0;
+		ArrayList<String> use_missing_number = new ArrayList<String>();
+		for(int i=0; i<missing_number.length - 1; i++){
+			use_missing_number.add(i, missing_number[i]);
 		}
-		for(int i=start_number; i<= end_number; i++){
-			person[i] = 1;
-			for(int j=0; j<missing_number.length - 1; j++){
-				if(i == Integer.parseInt(missing_number[j])){
-					person[i] = 0;
+		
+		ArrayList<String> use_if_number = new ArrayList<String>();
+		for(int i=0; i<if_number.length - 1; i++){
+			use_if_number.add(i, if_number[i]);
+		}
+		ArrayList<String> use_if_number_2 = new ArrayList<String>();
+		for(int i=0; i<if_number.length - 1; i++){
+			use_if_number_2.add(i, if_number_2[i]);
+		}
+		ArrayList<String> use_if_select = new ArrayList<String>();
+		for(int i=0; i<if_number.length - 1; i++){
+			use_if_select.add(i, if_select[i]);
+		}
+		ArrayList<String> use_if_select_2 = new ArrayList<String>();
+		for(int i=0; i<if_number.length - 1; i++){
+			use_if_select_2.add(i, if_select_2[i]);
+		}
+		
+		int sw = 0;
+		int temp = 0;
+
+		// start_number ~ end_number : 결번 제외 AMD 조건에 맞춰서 자리를 지정
+		for(int i=start_number; i<= end_number; i++){ // 시작 번호부터 끝 번호까지 돈다.
+			sw = 0;
+			
+			// missing_number와 같을 경우에는 다음 번호로 이동
+			for(int j=0; j<use_missing_number.size(); j++){
+				if(i == Integer.parseInt(use_missing_number.get(j))){
+					use_missing_number.remove(j);
+					sw = 1; // for_out에서 continue하라는 의미
 					break;
+				} // for _ in
+			} // for _ out
+			
+			// 결번임으로 뛰어 넘어야한다.
+			if(sw == 1) continue;
+					
+			int index = rand.nextInt(expert);
+					
+			// index 검사
+			if(person[index] != 1){
+				while(true){
+					index = rand.nextInt(expert);
+					
+					if(person[index] == 1) break;
 				}
-				else {
-					person[i] = 1;
-				}
 			}
-		}
-		
-		// i : 자리, number : 번호
-		int division_cnt = 1;
-		int height_cnt = 1;
-		int if_cnt = 0;
-		boolean sw = false;
-		boolean sw1 = false;
-		boolean sw2 = false;
-		
-		for(int i=0; i<seat.length; i++){
-			sw1 = false;
-			sw2 = false;
 			
-			if(if_cnt == line){
-				if_cnt = 0;
-				division_cnt++;
+			int current_division = index / line + 1;
+			int current_line_height = index / (division * line) + 1;
+			
+			// 조건 준 번호에 해당하는 지 check
+			for(int j=0; j<use_if_number.size(); j++){
+				sw = 0;
 				
-				sw1 = true;
-			}
-			if(division_cnt == division + 1){
-				division_cnt = 1;
-				height_cnt++;
-				
-				sw2 = true;
-			}
-			if_cnt++;
-			
-			int number = rand.nextInt(end_number) + start_number; // 번호
-			
-			if(person[number] == 1){ // 해당 번호가 유효하면
-				sw = false;
-				// 조건 제한
-				for(int j=0; j<if_number.length - 1; j++){
-					if(number == Integer.parseInt(if_number[j])) {
-						// 조건에 해당하는 번호와 같다면 분단인지 라인인지 구분
-						
-						if(if_select_2[j].equals("1")){
-							// 연산자
-							switch(if_select[j]){
-							case "1":
-								if(division_cnt != Integer.parseInt(if_number_2[j])){
-									sw = true;
-								}
-								break;
-							case "2":
-								if(division_cnt < Integer.parseInt(if_number_2[j])){
-									sw = true;
-								}
-								break;
-							case "3":
-								if(division_cnt > Integer.parseInt(if_number_2[j])){
-									sw = true;
-								}
-								break;
-							case "4":
-								if(division_cnt == Integer.parseInt(if_number_2[j])){
-									sw = true;
-								}
-								break;
+				if(i == Integer.parseInt(use_if_number.get(j))){
+					// 조건 준 번호에 해당한다면
+					
+					// 조건을 준 것이 분단인지 라인인지 구분
+					// 분단이라면
+					if(use_if_select_2.get(j).equals("1")){
+						// 연산
+						switch(use_if_select.get(j)){
+						case "1":
+							if(current_division != Integer.parseInt(use_if_number_2.get(j))){
+								sw = 2; // random을 다시 돌려야한다는 의미
 							}
-						}
-						
-						if(if_select_2[j].equals("2")){
-							// 연산자
-							switch(if_select[j]){
-							case "1":
-								if(height_cnt != Integer.parseInt(if_number_2[j])){
-									sw = true;
-								}
-								break;
-							case "2":
-								if(height_cnt < Integer.parseInt(if_number_2[j])){
-									sw = true;
-								}
-								break;
-							case "3":
-								if(height_cnt > Integer.parseInt(if_number_2[j])){
-									sw = true;
-								}
-								break;
-							case "4":
-								if(height_cnt == Integer.parseInt(if_number_2[j])){
-									sw = true;
-								}
-								break;
+							break;
+						case "2":
+							if(current_division < Integer.parseInt(use_if_number_2.get(j))){
+								sw = 2; // random을 다시 돌려야한다는 의미
 							}
+							break;
+						case "3":
+							if(current_division > Integer.parseInt(use_if_number_2.get(j))){
+								sw = 2; // random을 다시 돌려야한다는 의미
+							}
+							break;
+						case "4":
+							if(current_division == Integer.parseInt(use_if_number_2.get(j))){
+								sw = 2; // random을 다시 돌려야한다는 의미
+							}
+							break;
 						}
 					}
 					
-					if(sw == true){
+					// 라인이라면
+					if(use_if_select_2.get(j).equals("2")){
+						// 연산
+						switch(use_if_select.get(j)){
+						case "1":
+							if(current_line_height != Integer.parseInt(use_if_number_2.get(j))){
+								sw = 2; // random을 다시 돌려야한다는 의미
+							}
+							break;
+						case "2":
+							if(current_line_height < Integer.parseInt(use_if_number_2.get(j))){
+								sw = 2; // random을 다시 돌려야한다는 의미
+							}
+							break;
+						case "3":
+							if(current_line_height > Integer.parseInt(use_if_number_2.get(j))){
+								sw = 2; // random을 다시 돌려야한다는 의미
+							}
+							break;
+						case "4":
+							if(current_line_height == Integer.parseInt(use_if_number_2.get(j))){
+								sw = 2; // random을 다시 돌려야한다는 의미
+							}
+							break;
+						}
+					}
+					
+					if(sw == 2) {
 						break;
 					}
-				}
-				
-				if(sw == true){
-					i--;
-					sw = false;
-					if_cnt--;
 					
-					if(sw1 == true){
-						division_cnt--;
-						if_cnt = line;
+					if(j == use_if_number.size() - 1 && sw != 2){
+						use_if_number.remove(j);
+						use_if_number_2.remove(j);
+						use_if_select.remove(j);
+						use_if_select_2.remove(j);
 					}
-					if(sw2 == true){
-						height_cnt--;
-						division_cnt = division + 1;
-					}
-					
-					continue;
 				}
-				
-				person[number] = 0;
-				seat[i] = number;
-			} else {
+			} // end for
+			
+			if(sw == 2){
+				sw = 0;
 				i--;
-				if_cnt--;
-				
-				if(sw1 == true){
-					division_cnt--;
-				}
-				if(sw2 == true){
-					height_cnt--;
-				}
-				
+
 				continue;
 			}
+			
+			seat[index] = i;
+			person[index] = 0;
 		}
 	%>
 	
@@ -232,6 +235,5 @@
 			<input type="hidden" name="total_seat" id="total_seat" value="<%= p_total_seat %>">
 		</div>
 	</form>
-
 </body>
 </html>
