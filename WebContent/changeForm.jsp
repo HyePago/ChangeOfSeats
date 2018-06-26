@@ -172,7 +172,7 @@
 						use_if_number_2.remove(j);
 						use_if_select.remove(j);
 						use_if_select_2.remove(j);
-					}
+					} // end _ if
 				}
 			} // end for
 			
