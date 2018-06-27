@@ -7,6 +7,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%
+		request.setCharacterEncoding("UTF-8");
+	%>
+	
+	<form action="loginProc.jsp" method="post">
+		<table class="join_table">
+			<tr>
+				<th>ID</th>
+				<td><input type="text" name="ID" required="required"></td>
+			</tr>
+			<tr>
+				<th>PASSWORD</th>
+				<td><input type="password" name="PW" required="required"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="로그인">
+				</td>
+			</tr>
+		</table>
+	</form>	
 </body>
 </html>

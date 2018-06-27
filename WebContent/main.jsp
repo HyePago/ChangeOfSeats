@@ -17,8 +17,19 @@
 		<nav class="main_nav">
 			<ul>
 				<li><a href="index.jsp">자리배치 프로그램</a></li>
+				<%
+					if(((String)session.getAttribute("ID")) == null || ((String)session.getAttribute("ID")).equals("")) {
+				%>
 				<li><a href="login.jsp">로그인</a></li>
 				<li><a href="join.jsp">회원가입</a></li>
+				<%
+					} else {
+				%>
+				<li><a href="login.jsp">기록보기</a></li>
+				<li><a href="logout.jsp">로그아웃</a></li>
+				<%
+					}
+				%>
 				<li><a href="#">관리자 페이지</a></li>
 			</ul>
 		</nav>

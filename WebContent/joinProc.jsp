@@ -24,8 +24,9 @@
 		
 		BufferedWriter bw = null;
 		PrintWriter writer = null;
-		BufferedWriter wrtier = null;
 		BufferedReader reader = null;
+		BufferedWriter bw2 = null;
+		PrintWriter writer2 = null;
 		
 		String[] info = null;
 		
@@ -65,13 +66,19 @@
 			writer.println("");
 			writer.flush();
 			writer.close();
+			
+			// 회원가입 후, 회원 당 만들어주는 파일
+			filePath = application.getRealPath("/WEB-INF/record/"+ID+".txt");
+			bw2 = new BufferedWriter(new FileWriter(filePath));
+			writer2 = new PrintWriter(bw2);
+			
+			writer.flush();
+			writer.close();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		
-		out.println("<script>alert('로그인에 성공하셨습니다.');</script>");
 	
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("login.jsp");
 	%>
 </body>
 </html>
