@@ -202,7 +202,7 @@
 							for(int k=0; k<line; k++){
 								if(total_seat[count - 1].equals("1")){
 									%>
-										<td id="seat<%= count %>" value="<%= count %>"><div class="seat"><%= seat[cnt] %></div></td>
+										<td id="seat<%= count %>" value="<%= count %>" height="80px"><div class="seat"><%= seat[cnt] %></div></td>
 									<%
 									cnt ++;
 								} else {

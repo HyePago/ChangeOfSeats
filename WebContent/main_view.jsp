@@ -281,7 +281,7 @@
 						for(int j=0; j<division; j++){
 							for(int k=0; k<line; k++){
 								%>
-									<td id="seat<%= count %>" onclick="javascript:seat_click(this)" value="<%= count %>"><div class="seat"><%= count %></div></td>
+									<td class="seat_td" id="seat<%= count %>" onclick="javascript:seat_click(this)" value="<%= count %>" height="80px"><div class="seat"><%= count %></div></td>
 								<%
 								count++;
 							}

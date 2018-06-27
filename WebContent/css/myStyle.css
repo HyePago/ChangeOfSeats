@@ -81,12 +81,19 @@ body {
 	color: white;
 }
 .main_seat_table {
-	width: 500px;
+	width: 900px;
 	margin: auto;
 	margin-top: 20px;
 }
+.seat_td {
+	width: 100px;
+}
 .main_seat_table td {
 	border: 1px solid #37966F;
+	width: 1000px;
+}
+.main_seat_table th {
+	padding: 0px 10px;
 }
 .main_seat_sub_table {
 	width: 500px;
@@ -107,4 +114,54 @@ body {
 .main_view_submit:hover {
 	background-color: #37966F;
 	color: white;
+}
+
+/* join */
+.join_table {
+	width: 500px;
+	margin: auto;
+	margin-top: 20px;
+	text-align: right;
+}
+.join_table td{
+	padding: 15px 0px;
+}
+.join_table input[type="text"] {
+	background-color: rgba(255,255,255,0);
+	box-shadow: inherit;
+	border: 1px solid rgba(255,255,255,0);
+	border-bottom: 3px solid #B9E4C9;
+	font-size: 1em;
+	padding-left: 5px;   
+	font-family: 'Nanum Gothic Coding' ,'Nanum Brush Script', sans-serif, serif;
+	color: gray;
+}
+.join_table input[type="text"]:focus {
+	outline: none;
+}
+.join_table input[type="password"] {
+	background-color: rgba(255,255,255,0);
+	box-shadow: inherit;
+	border: 1px solid rgba(255,255,255,0);
+	border-bottom: 3px solid #B9E4C9;
+	font-size: 1em;
+	padding-left: 5px;   
+	font-family: 'Nanum Gothic Coding' ,'Nanum Brush Script', sans-serif, serif;
+	color: gray;
+}
+.join_table input[type="password"]:focus {
+	outline: none;
+}
+.join_table input[type="number"] {
+	background-color: rgba(255,255,255,0);
+	box-shadow: inherit;
+	border: 1px solid rgba(255,255,255,0);
+	border-bottom: 3px solid #B9E4C9;
+	font-size: 1em;
+	padding-left: 5px;   
+	font-family: 'Nanum Gothic Coding' ,'Nanum Brush Script', sans-serif, serif;
+	color: gray;
+}
+.join_table input[type="number"]:focus {
+	outline: none;
 }

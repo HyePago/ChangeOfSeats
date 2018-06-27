@@ -17,7 +17,8 @@
 		<nav class="main_nav">
 			<ul>
 				<li><a href="index.jsp">자리배치 프로그램</a></li>
-				<li><a href="#">JSP 순서</a></li>
+				<li><a href="login.jsp">로그인</a></li>
+				<li><a href="join.jsp">회원가입</a></li>
 				<li><a href="#">관리자 페이지</a></li>
 			</ul>
 		</nav>
