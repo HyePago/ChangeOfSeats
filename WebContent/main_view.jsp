@@ -295,6 +295,13 @@
 				<tr>
 					<td>
 						<input type="button" value="돌리기" onclick="javascript:change()" class="main_view_submit">
+						<%
+							if(!(((String)session.getAttribute("ID")) == null || ((String)session.getAttribute("ID")).equals(""))) {
+						%>
+								<input type="button" value="이전과 안 겹치게" class="main_view_submit" onclick="javascript:before_change()" >
+						<%
+							}
+						%>
 					</td>
 				</tr>
 			</table>
@@ -361,6 +368,17 @@
 			} 
 
 			document.getElementById("total_seat").value = total_seat;
+			document.getElementById("form_2").submit();
+		}
+		function before_change() {
+			if(checked < <%= expert %>){
+				alert((<%= expert %> - checked) + "자리 더 체크해주셔야 합니다.");
+				
+				return;
+			} 
+
+			document.getElementById("total_seat").value = total_seat;
+			document.getElementById("form_2").action = "strict_change.jsp";
 			document.getElementById("form_2").submit();
 		}
 		

@@ -215,6 +215,18 @@ body {
 	background-color: #37966F;
 	color: white;
 }
+.main_seat_sub_table input[type="submit"]:focus{
+	outline: none;
+}
+.main_view_before_submit {
+	font-family: 'Nanum Gothic Coding' ,'Nanum Brush Script', sans-serif, serif;
+	background-color: rgba(255,255,255,0);
+	box-shadow: inherit;
+	border: 2px solid #B9E4C9;
+	width: 500px;
+	height: 50px;
+	font-size: 0.8em;
+}
 
 /* show_record */
 .show_record_table {
@@ -233,4 +245,7 @@ body {
 	cursor: default;
 	background-color: #37966F;
 	color: white;
+}
+.show_record_table td:focus {
+	outline: none;
 }
