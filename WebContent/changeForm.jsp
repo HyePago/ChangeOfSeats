@@ -98,7 +98,7 @@
 				}
 			}
 			
-			int current_division = index / line + 1;
+			int current_division = (index % (line * division)) / line + 1;
 			int current_line_height = index / (division * line) + 1;
 			
 			// 조건 준 번호에 해당하는 지 check
@@ -186,9 +186,11 @@
 			seat[index] = i;
 			person[index] = 0;
 		}
+
+		application.setAttribute("seat", seat);
 	%>
 	
-	<form action="change.jsp" method="post">
+	<form action="change.jsp" method="post" id="myForm" name="myForm" class="myForm">
 		<div>
 			<table class="main_seat_table">
 				<%
@@ -222,7 +224,13 @@
 				<tr>
 					<td> <input type="button" value="이전으로 돌아가기" onclick="history.go(-1);"></td>
 					<td> <input type="submit" value="다시 돌리기"> </td>
-					<td> <input type="button" value="선택하기"> </td>
+					<%
+						if(!(((String)session.getAttribute("ID")) == null || ((String)session.getAttribute("ID")).equals(""))) {
+					%>
+							<td> <input type="button" value="저장하기" onclick="javascript:save(1)"> </td>
+					<%
+						}
+					%>
 				</tr>
 			</table>
 			
@@ -235,5 +243,14 @@
 			<input type="hidden" name="total_seat" id="total_seat" value="<%= p_total_seat %>">
 		</div>
 	</form>
+	<script>
+		function save(index){
+			if(index == 1){
+				document.myForm.action = "save_record.jsp";
+			}
+
+			document.myForm.submit();
+		}
+	</script>
 </body>
 </html>

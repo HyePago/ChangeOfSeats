@@ -25,7 +25,7 @@
 				<%
 					} else {
 				%>
-				<li><a href="login.jsp">기록보기</a></li>
+				<li><a href="show_record.jsp">기록보기</a></li>
 				<li><a href="logout.jsp">로그아웃</a></li>
 				<%
 					}
