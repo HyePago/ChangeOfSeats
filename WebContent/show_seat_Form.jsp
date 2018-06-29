@@ -100,6 +100,7 @@
 			<table class="main_seat_sub_table">
 				<tr>
 					<td> <input type="button" value="이전으로 돌아가기" onclick="history.go(-1);"></td>
+					<td> <input type="button" value="삭제" onclick="location.href='delete_record.jsp?count=<%=division_number%>'"></td>
 				</tr>
 			</table>
 		</div>

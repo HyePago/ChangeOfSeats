@@ -73,8 +73,8 @@
 		// 직전 자리 가져오기
 		String b_total_seat = null;
 		String b_seat = null;
-		String[] total_seat_b = null;
-		String[] seat_b = null;
+		String[] total_seat_b = new String[0];
+		String[] seat_b = new String[0];
 		
 		int division_b = 0;
 		int line_b = 0;
@@ -144,8 +144,7 @@
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		
+	
 		int sw = 0;
 		int temp = 0;
 
@@ -168,7 +167,13 @@
 			int index = rand.nextInt(expert);
 					
 			// index 검사
-			if(person[index] != 1 || seat[index] == Integer.parseInt(seat_b[index])){
+		
+			if(seat_b.length == 0){
+				out.print("<script>alert('이전에 저장된 결과가 없습니다.'); history.go(-1); </script>");
+				return;
+			}					
+			
+			if(person[index] != 1 || i == Integer.parseInt(seat_b[index])){
 				while(true){
 					index = rand.nextInt(expert);
 					
@@ -260,7 +265,7 @@
 
 				continue;
 			}
-			
+
 			seat[index] = i;
 			person[index] = 0;
 		}
